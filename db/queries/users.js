@@ -31,3 +31,15 @@ export async function getUserByUsernameAndPassword(username, password) {
   if (!isValid) return null;
   return user;
 }
+
+export async function getUserById(id) {
+  const sql = `
+  SELECT *
+  FROM users
+  WHERE id = $1
+  `;
+  const {
+    rows: [user],
+  } = await db.query(sql, [id]);
+  return user;
+}
